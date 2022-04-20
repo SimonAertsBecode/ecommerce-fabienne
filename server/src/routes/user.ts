@@ -1,9 +1,4 @@
-import { Router } from 'express';
+import Router from 'express'
 
-const userRoutes = Router();
+const userRouter = Router()
 
-userRoutes.get('/usertest', (_, res) => {
-   res.send('usertest good');
-});
-
-export default userRoutes;

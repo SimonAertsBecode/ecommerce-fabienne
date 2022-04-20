@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const user_1 = __importDefault(require("./routes/user"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 mongoose_1.default
@@ -17,7 +16,7 @@ mongoose_1.default
     .catch((err) => {
     console.log(err);
 });
-app.use('/api/user', user_1.default);
+app.use(express_1.default.json());
 app.listen(process.env.PORT || 5000, () => {
     console.log('App is running on port 5000');
 });

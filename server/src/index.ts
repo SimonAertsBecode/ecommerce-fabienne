@@ -1,7 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import userRoutes from './routes/user';
+
+//*Routes import
+import authRouter from './routes/auth';
 
 const app = express();
 dotenv.config();
@@ -16,7 +18,7 @@ mongoose
    });
 
 app.use(express.json());
-app.use('/api/user', userRoutes);
+app.use("/api/auth", authRouter)
 
 app.listen(process.env.PORT || 5000, () => {
    console.log('App is running on port 5000');
