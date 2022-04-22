@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js';
 import jwt from 'jsonwebtoken';
 
 //*Import class
-import { useAuthUtils } from '../utils/AuthUtils';
+import { useUserUtils } from '../utils/UserUtils';
 
 //*REGISTER
 export const register = async (req: any, res: any) => {
@@ -12,12 +12,12 @@ export const register = async (req: any, res: any) => {
    const newUser = new User({
       username: username,
       email: email,
-      password: useAuthUtils.encryptPassword(password),
+      password: useUserUtils.encryptPassword(password),
    });
 
    try {
       const savedUser = await newUser.save();
-      res.status(201).json(useAuthUtils.removePassword(savedUser));
+      res.status(201).json(useUserUtils.removePassword(savedUser));
    } catch (error) {
       res.status(500).json(error);
    }
@@ -28,11 +28,11 @@ export const login = async (req: any, res: any) => {
    const { username, password: requestPassword } = req.body;
    try {
       const user = await User.findOne({ username: username });
-      if (!user) return !user && res.status(401).json('wrong credentials');
+      if (!user) return !user && res.status(401).json('no match for that username');
 
       const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASSWORD_SECRET!);
       const decryptedPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-      if (decryptedPassword !== requestPassword) return res.status(401).json('wrong credentials');
+      if (decryptedPassword !== requestPassword) return res.status(401).json('wrong password');
 
       const accessToken = jwt.sign(
          {
@@ -43,7 +43,9 @@ export const login = async (req: any, res: any) => {
          { expiresIn: 3600 * 24 * 3 }
       );
 
-      return res.status(200).json({ ...useAuthUtils.removePassword(user), accessToken });
+      console.log(accessToken);
+
+      return res.status(200).json({ ...useUserUtils.removePassword(user), accessToken });
    } catch (error) {
       res.status(500).json(error);
    }

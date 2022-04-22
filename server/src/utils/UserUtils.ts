@@ -7,10 +7,17 @@ interface userInt {
    _doc?: any;
 }
 
-export class AuthUtils {
+export class UserUtils {
    removePassword(user: userInt) {
       const { password, ...others } = user._doc;
       return others;
+   }
+
+   removePwdFromAllUsers(users: userInt[]) {
+      return users.map((user) => {
+         const { password, ...others } = user._doc;
+         return others;
+      });
    }
 
    encryptPassword(password: string) {
@@ -18,4 +25,4 @@ export class AuthUtils {
    }
 }
 
-export const useAuthUtils = new AuthUtils();
+export const useUserUtils = new UserUtils();

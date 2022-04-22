@@ -24,3 +24,14 @@ export const verifyTokenAndAuthorization = (req: any, res: any, next: any) => {
       }
    });
 };
+
+//Checks is manipulation is done by admin
+export const verifyTokenAndAdmin = (req: any, res: any, next: any) => {
+   verifyToken(req, res, () => {
+      if (req.user.isAdmin) {
+         next();
+      } else {
+         res.status(403).json('Only admin can do these updates');
+      }
+   });
+};
