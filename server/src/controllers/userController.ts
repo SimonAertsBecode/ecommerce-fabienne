@@ -49,7 +49,7 @@ export const getUser = async (req: any, res: any) => {
 //get all users
 export const getAllUsers = async (req: any, res: any) => {
    try {
-      const users = await User.find();
+      const users = await User.find().sort({ id: -1 });
       res.status(200).json(useUserUtils.removePwdFromAllUsers(users));
    } catch (error) {
       res.status(500).json(error);

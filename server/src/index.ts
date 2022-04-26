@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 //*Routes import
 import authRouter from './routes/auth';
 import userRouter from './routes/user';
+import productRouter from './routes/product';
+import cartRouter from './routes/cart';
 
 const app = express();
 dotenv.config();
@@ -21,6 +23,8 @@ mongoose
 app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/products', productRouter);
+app.use('/api/cart', cartRouter);
 
 app.listen(process.env.PORT || 5000, () => {
    console.log('App is running on port 5000');
