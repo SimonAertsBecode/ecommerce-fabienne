@@ -50,7 +50,6 @@
 //     }
 
 //    create(req: any, res: any) {
-//        const newCart = new this.model(req.body);
 
 //    try {
 //       const savedCart = await newCart.save();

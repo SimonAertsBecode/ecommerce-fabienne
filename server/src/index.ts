@@ -7,6 +7,7 @@ import authRouter from './routes/auth';
 import userRouter from './routes/user';
 import productRouter from './routes/product';
 import cartRouter from './routes/cart';
+import orderRouter from './routes/order';
 
 const app = express();
 dotenv.config();
@@ -25,6 +26,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/cart', cartRouter);
+app.use('/api/order', orderRouter);
 
 app.listen(process.env.PORT || 5000, () => {
    console.log('App is running on port 5000');
