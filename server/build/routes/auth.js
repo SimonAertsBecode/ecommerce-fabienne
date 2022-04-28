@@ -27,13 +27,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const orderController = __importStar(require("../controllers/orderController"));
-//**MiddleWare
-const verifyToken_1 = require("../middleware/verifyToken");
-const orderRouter = (0, express_1.default)();
-orderRouter.post('/', verifyToken_1.verifyToken, orderController.createOrder);
-orderRouter.put('/:id', verifyToken_1.verifyTokenAndAdmin, orderController.updateOrder);
-orderRouter.delete('/:id', verifyToken_1.verifyTokenAndAdmin, orderController.deleteOrder);
-orderRouter.get('/find/:userId', verifyToken_1.verifyTokenAndAuthorization, orderController.getOrder);
-orderRouter.get('/', verifyToken_1.verifyTokenAndAdmin, orderController.getAllOrders);
-exports.default = orderRouter;
+const AuthControllers = __importStar(require("../controllers/authController"));
+const authRouter = (0, express_1.default)();
+authRouter.post('/register', AuthControllers.register);
+authRouter.post('/login', AuthControllers.login);
+exports.default = authRouter;
