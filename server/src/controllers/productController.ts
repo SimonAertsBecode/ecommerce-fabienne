@@ -1,15 +1,9 @@
 import Product from '../models/Product';
+import useCRUD from '../utils/CRUD';
 
 //Create product
 export const createProduct = async (req: any, res: any) => {
-   const newProduct = new Product(req.body);
-
-   try {
-      const savedProduct = await newProduct.save();
-      res.status(200).json(savedProduct);
-   } catch (error) {
-      res.status(500).json(error);
-   }
+   useCRUD.create(req, res, Product);
 };
 
 //Update
