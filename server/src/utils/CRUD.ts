@@ -6,42 +6,8 @@ import Product from '../models/Product';
 import Order from '../models/Order';
 import User from '../models/User';
 
-// interface cart {
-//    userId: string;
-//    products: [
-//       {
-//          productId: string;
-//          quantity: number;
-//       }
-//    ];
-// }
-
-// interface orders {
-//    userId: string;
-//    products: [
-//       {
-//          productId: string;
-//          quantity: number;
-//       }
-//    ];
-//    amount: number;
-//    address: [string | number];
-//    status: string;
-// }
-
-// interface product {
-//    title: string;
-//    description: string;
-//    image: string;
-//    price: number;
-// }
-
-// interface user {
-//    username: string
-//    email: string,
-//    password: string,
-//    isAdmin: boolean
-// }
+//*Type import
+import { Request, Response } from 'express';
 
 type models = typeof Cart | typeof Order | typeof Product | typeof User;
 
@@ -50,7 +16,7 @@ class CRUD extends UserUtils {
       super();
    }
 
-   async create(req: any, res: any, model: models) {
+   async create(req: Request, res: Response, model: models) {
       const newModel = new model(req.body);
 
       try {
@@ -61,7 +27,7 @@ class CRUD extends UserUtils {
       }
    }
 
-   async update(req: any, res: any, model: models) {
+   async update(req: Request, res: Response, model: models) {
       const { id } = req.params;
 
       try {
@@ -78,7 +44,7 @@ class CRUD extends UserUtils {
       }
    }
 
-   async delete(req: any, res: any, model: models) {
+   async delete(req: Request, res: Response, model: models) {
       try {
          await model.findByIdAndDelete(req.params.id);
          res.status(200).json(`${model} has been deleted successfully`);
@@ -87,7 +53,7 @@ class CRUD extends UserUtils {
       }
    }
 
-   async getOne(req: any, res: any, model: models) {
+   async getOne(req: Request, res: Response, model: models) {
       if (model === Order || Cart) {
          //Var declaration to be able to access it outside of the if()scope
          var { userId: rightId } = req.params;
@@ -103,7 +69,7 @@ class CRUD extends UserUtils {
       }
    }
 
-   async getAll(_: null, res: any, model: models) {
+   async getAll(req: Request, res: Response, model: models) {
       try {
          const allItems = await model.find().sort({ id: -1 });
          res.status(200).json(model === User ? this.removePwdFromAllUsers(allItems) : allItems);

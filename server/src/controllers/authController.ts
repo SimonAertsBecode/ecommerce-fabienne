@@ -2,11 +2,14 @@ import User from '../models/User';
 import CryptoJS from 'crypto-js';
 import jwt from 'jsonwebtoken';
 
+//*Type imports
+import { Request, Response } from 'express';
+
 //*Import class
 import { useUserUtils } from '../utils/UserUtils';
 
 //*REGISTER
-export const register = async (req: any, res: any) => {
+export const register = async (req: Request, res: Response) => {
    const { username, email, password } = req.body;
 
    const newUser = new User({
@@ -24,7 +27,7 @@ export const register = async (req: any, res: any) => {
 };
 
 //*LOGIN
-export const login = async (req: any, res: any) => {
+export const login = async (req: Request, res: Response) => {
    const { username, password: requestPassword } = req.body;
    try {
       const user = await User.findOne({ username: username });
