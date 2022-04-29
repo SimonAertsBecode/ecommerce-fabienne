@@ -72,7 +72,7 @@ class CRUD extends UserUtils {
             },
             { new: true }
          );
-         res.status(200).json(getItem);
+         res.status(200).json(model === User ? this.removePassword(getItem) : getItem);
       } catch (error) {
          res.status(500).json(error);
       }
@@ -81,7 +81,7 @@ class CRUD extends UserUtils {
    async delete(req: any, res: any, model: models) {
       try {
          await model.findByIdAndDelete(req.params.id);
-         res.status(200).json('cart successfully deleted');
+         res.status(200).json(`${model} has been deleted successfully`);
       } catch (error) {
          res.status(500).json(error);
       }
@@ -97,7 +97,7 @@ class CRUD extends UserUtils {
 
       try {
          const item = await model.findOne({ rightId });
-         res.status(200).json(item);
+         res.status(200).json(model === User ? this.removePassword(item) : item);
       } catch (error) {
          res.status(500).json(error);
       }
@@ -106,7 +106,7 @@ class CRUD extends UserUtils {
    async getAll(_: null, res: any, model: models) {
       try {
          const allItems = await model.find().sort({ id: -1 });
-         res.status(200).json(allItems);
+         res.status(200).json(model === User ? this.removePwdFromAllUsers(allItems) : allItems);
       } catch (error) {
          res.status(500).json(error);
       }

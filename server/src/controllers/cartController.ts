@@ -22,6 +22,6 @@ export const getCart = async (req: any, res: any) => {
 };
 
 //Get all carts
-export const getAllCarts = async (req: any, res: any) => {
+export const getAllCarts = async (_: null, res: any) => {
    useCRUD.getAll(null, res, Cart);
 };
