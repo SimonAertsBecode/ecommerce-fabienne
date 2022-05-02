@@ -9,7 +9,7 @@ import { Request, Response } from 'express';
 import { useUserUtils } from '../utils/UserUtils';
 
 //**Import error management */
-import { registerFormErrors } from '../utils/errorManagement';
+import { handleFormError } from '../utils/errorManagement';
 
 //*REGISTER
 export const register = async (req: Request, res: Response) => {
@@ -25,7 +25,7 @@ export const register = async (req: Request, res: Response) => {
       const savedUser = await newUser.save();
       res.status(201).json(useUserUtils.removePassword(savedUser));
    } catch (error) {
-      res.status(500).json(registerFormErrors(error));
+      res.status(500).json(handleFormError(error));
    }
 };
 
@@ -53,6 +53,7 @@ export const login = async (req: Request, res: Response) => {
 
       return res.status(200).json({ ...useUserUtils.removePassword(user), accessToken });
    } catch (error) {
+      //error message already handled by mongoDB
       res.status(500).json(error);
    }
 };
