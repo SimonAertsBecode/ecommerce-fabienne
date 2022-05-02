@@ -8,6 +8,9 @@ import { Request, Response } from 'express';
 //*Import class
 import { useUserUtils } from '../utils/UserUtils';
 
+//**Import error management */
+import { registerFormErrors } from '../utils/errorManagement';
+
 //*REGISTER
 export const register = async (req: Request, res: Response) => {
    const { username, email, password } = req.body;
@@ -22,7 +25,7 @@ export const register = async (req: Request, res: Response) => {
       const savedUser = await newUser.save();
       res.status(201).json(useUserUtils.removePassword(savedUser));
    } catch (error) {
-      res.status(500).json(error);
+      res.status(500).json(registerFormErrors(error));
    }
 };
 

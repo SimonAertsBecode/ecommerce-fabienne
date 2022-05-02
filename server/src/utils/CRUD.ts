@@ -9,6 +9,9 @@ import User from '../models/User';
 //*Type import
 import { Request, Response } from 'express';
 
+//*Error management
+import { registerFormErrors } from '../utils/errorManagement';
+
 type models = typeof Cart | typeof Order | typeof Product | typeof User;
 
 class CRUD extends UserUtils {
@@ -23,7 +26,7 @@ class CRUD extends UserUtils {
          const savedModel = await newModel.save();
          res.status(200).json(savedModel);
       } catch (error) {
-         res.status(500).json(error);
+         res.status(500).json(registerFormErrors(error));
       }
    }
 
