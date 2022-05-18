@@ -1,7 +1,13 @@
 import React from 'react';
+import StripeContainer from '../../stripe/StripeContainer';
 
 const Payment = () => {
-   return <h1>Page de paiement</h1>;
+   return (
+      <section className='payment'>
+         <h1>Page de paiement</h1>
+         <StripeContainer />
+      </section>
+   );
 };
 
 export default Payment;

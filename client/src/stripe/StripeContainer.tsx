@@ -12,14 +12,14 @@ const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_STRIPE_KEY!);
   Don't call loadStripe in component ==> don't want to load more than you have to 
  */
 
-const StripeContainer = ({ children, title }: { children: React.ReactNode; title: string }) => {
+const StripeContainer = () => {
    return (
-      <>
+      <section className='stripe-container'>
          <h1>Stripe Container</h1>
          <Elements stripe={stripePromise}>
             <CheckoutForm />
          </Elements>
-      </>
+      </section>
    );
 };
 
