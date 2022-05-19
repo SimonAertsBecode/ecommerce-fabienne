@@ -1,10 +1,12 @@
 import React from 'react';
-import Payment from './Payment';
+import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 
 const Pay = () => {
    const location = useLocation();
    const { pathname } = location;
+
+   const checkout = () => {};
 
    return (
       <section className='pay-page'>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-import FormDetailsFields from '../components/prebuilt/FormDetailsFields';
+import FormDetailsFields from '../../../components/prebuilt/FormDetailsFields';
 
 const CheckoutForm = () => {
    const [isProcessing, setProcessingTo] = useState(false);
@@ -14,6 +14,11 @@ const CheckoutForm = () => {
 
    const handleSubmit = async (e: React.SyntheticEvent) => {
       e.preventDefault();
+
+      if(!stripe || !elements) return
+
+      const cardElement = elements?.getElement(CardElement);
+      console.log(cardElement);
    };
 
    const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {

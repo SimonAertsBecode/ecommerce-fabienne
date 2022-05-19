@@ -1,4 +1,4 @@
-import StripeContainer from '../../stripe/StripeContainer';
+import StripeContainer from './stripe/StripeContainer';
 
 const Payment = () => {
    return (
