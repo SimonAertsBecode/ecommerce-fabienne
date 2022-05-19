@@ -1,4 +1,3 @@
-import React from 'react';
 import StripeContainer from '../../stripe/StripeContainer';
 
 const Payment = () => {

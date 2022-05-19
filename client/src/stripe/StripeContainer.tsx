@@ -15,7 +15,6 @@ const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_STRIPE_KEY!);
 const StripeContainer = () => {
    return (
       <section className='stripe-container'>
-         <h1>Stripe Container</h1>
          <Elements stripe={stripePromise}>
             <CheckoutForm />
          </Elements>

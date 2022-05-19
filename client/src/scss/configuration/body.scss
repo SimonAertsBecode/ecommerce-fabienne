@@ -1,10 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Basic&family=Poiret+One&display=swap');
+
 * {
    padding: 0;
    margin: 0;
    box-sizing: content-box;
+   &:not(button) {
+      font-family: 'Gentium Basic', serif;
+   }
 }
 
 body {
    min-width: 100vw;
    min-height: 100vh;
+
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6 {
+      font-family: 'Poiret One', cursive;
+   }
+
+   button {
+      width: 4rem;
+      font-size: 1.1rem;
+   }
 }

@@ -27,10 +27,10 @@ const CheckoutForm = () => {
       base: {
          color: 'black',
          fontSize: '1.5rem',
-         backgroundColor: 'aqua',
+         backgroundColor: 'none',
          iconColor: 'black',
          '::placeholder': {
-            color: '#87bbfd',
+            color: 'black',
          },
       },
       invalid: {
