@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 //*Routes import
 import authRouter from './routes/auth';
@@ -21,6 +22,12 @@ mongoose
    .catch((err) => {
       console.log(err);
    });
+
+app.use(
+   cors({
+      origin: 'http://localhost:3000',
+   })
+);
 
 app.use(express.json());
 app.use('/api/auth', authRouter);
