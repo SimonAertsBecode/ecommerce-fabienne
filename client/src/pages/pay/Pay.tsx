@@ -6,7 +6,23 @@ const Pay = () => {
    const location = useLocation();
    const { pathname } = location;
 
-   const checkout = () => {};
+   const checkout = () => {
+      axios
+         .post('http://localhost:5000/pay/create-checkout-session', {
+            items: [
+               { id: 1, quantity: 2 },
+               { id: 2, quantity: 5 },
+            ],
+         })
+         .then((res) => {
+            console.log('success');
+            console.log(res);
+         })
+         .catch((err) => {
+            console.log('failed');
+            console.log(err);
+         });
+   };
 
    return (
       <section className='pay-page'>
@@ -14,6 +30,7 @@ const Pay = () => {
          <Link to={`${pathname}/payment`}>
             <button>aller payer</button>
          </Link>
+         <button onClick={checkout}>Checkout</button>
       </section>
    );
 };
