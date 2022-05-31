@@ -14,9 +14,10 @@ const Pay = () => {
                { id: 2, quantity: 5 },
             ],
          })
-         .then((res) => {
+         .then(({ data }) => {
             console.log('success');
-            console.log(res);
+            const { url } = data;
+            window.location = url;
          })
          .catch((err) => {
             console.log('failed');

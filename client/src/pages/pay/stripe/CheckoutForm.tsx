@@ -4,18 +4,25 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 import FormDetailsFields from '../../../components/prebuilt/FormDetailsFields';
 
-const CheckoutForm = () => {
-   const [isProcessing, setProcessingTo] = useState(false);
-   const [checkoutError, setCheckoutError] = useState();
+const CheckoutForm = ({ price }: { price: number }) => {
+   // const [isProcessing, setProcessingTo] = useState(false);
+   // const [checkoutError, setCheckoutError] = useState();
    const [input, setInput] = useState({});
 
    const stripe = useStripe();
    const elements = useElements();
 
+   console.log(`${process.env.REACT_APP_SERVER_URL!}api/pay/payment_intents`);
+
    const handleSubmit = async (e: React.SyntheticEvent) => {
       e.preventDefault();
+      console.log(`url inside submit: ${process.env.REACT_APP_SERVER_ULR!}api/pay/payment_intents`);
 
-      if(!stripe || !elements) return
+      if (!stripe || !elements) return;
+
+      const { data: clientSecret } = await axios.post(`${process.env.REACT_APP_SERVER_ULR!}api/pay/payment_intents`);
+
+      console.log(clientSecret);
 
       const cardElement = elements?.getElement(CardElement);
       console.log(cardElement);

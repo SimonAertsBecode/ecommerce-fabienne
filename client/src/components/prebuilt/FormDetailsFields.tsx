@@ -8,7 +8,6 @@ const FormDetailsFields = ({ method }: { method: React.ChangeEventHandler<HTMLIn
          <FormField name='email' label='Email' type='email' placeholder='jane.doe@example.com' method={method} required />
          <FormField name='address' label='Address' type='text' placeholder='185 Berry St. Suite 550' method={method} required />
          <FormField name='city' label='City' type='text' placeholder='San Francisco' method={method} required />
-         <FormField name='state' label='State' type='text' placeholder='California' method={method} required />
          <FormField name='postal' label='Postal' type='number' placeholder='1000' method={method} required />
       </>
    );

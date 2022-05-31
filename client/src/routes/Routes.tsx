@@ -15,6 +15,7 @@ const Routes = () => {
             <Route path='payment' element={<Payment />} />
             <Route path='success' element={<Success />} />
             <Route path='cancel' element={<Cancel />} />
+            <Route path='*' element={<Navigate to='/' />} />
          </Route>
       </Router>
    );

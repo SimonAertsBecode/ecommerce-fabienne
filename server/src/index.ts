@@ -35,7 +35,7 @@ app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use('/api/orders', orderRouter);
-app.use('/pay', stripeRouter);
+app.use('/api/pay', stripeRouter);
 
 app.listen(process.env.PORT || 5000, () => {
    console.log('App is running on port 5000');
