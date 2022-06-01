@@ -1,38 +1,67 @@
-import React, { useState } from 'react';
+import React, { FormEvent, SyntheticEvent, useRef, useState } from 'react';
 import axios from 'axios';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 import FormDetailsFields from '../../../components/prebuilt/FormDetailsFields';
 
 const CheckoutForm = ({ price }: { price: number }) => {
-   // const [isProcessing, setProcessingTo] = useState(false);
-   // const [checkoutError, setCheckoutError] = useState();
-   const [input, setInput] = useState({});
+   const [isProcessing, setProcessingTo] = useState(false);
+   const [checkoutError, setCheckoutError] = useState<string | undefined>();
 
    const stripe = useStripe();
    const elements = useElements();
 
-   console.log(`${process.env.REACT_APP_SERVER_URL!}api/pay/payment_intents`);
+   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-   const handleSubmit = async (e: React.SyntheticEvent) => {
-      e.preventDefault();
-      console.log(`url inside submit: ${process.env.REACT_APP_SERVER_ULR!}api/pay/payment_intents`);
+      setProcessingTo(true);
+
+      const { name, email, address, city, postal } = event.target as typeof event.target & {
+         name: { value: string };
+         email: { value: string };
+         address: { value: string };
+         city: { value: string };
+         postal: { value: string };
+      };
+
+      const billingDetails = {
+         name: name.value,
+         email: email.value,
+         address: {
+            line1: address.value,
+            city: city.value,
+            postal_code: postal.value,
+         },
+      };
 
       if (!stripe || !elements) return;
 
-      const { data: clientSecret } = await axios.post(`${process.env.REACT_APP_SERVER_ULR!}api/pay/payment_intents`);
+      try {
+         const { data: clientSecret } = await axios.post(`${process.env.REACT_APP_SERVER_URL!}api/pay/payment_intents`, {
+            amount: price * 100,
+         });
 
-      console.log(clientSecret);
+         const cardElement = elements.getElement(CardElement)!;
 
-      const cardElement = elements?.getElement(CardElement);
-      console.log(cardElement);
-   };
+         const { error } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+               card: cardElement,
+               billing_details: billingDetails,
+            },
+         });
 
-   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-      setInput({
-         ...input,
-         [e.currentTarget.name]: e.currentTarget.value,
-      });
+         if (error) {
+            setCheckoutError(error.message);
+            setProcessingTo(false);
+            return;
+         }
+      } catch (error: any) {
+         if (error) {
+            setCheckoutError(error.message);
+         }
+      }
+
+      setProcessingTo(false);
    };
 
    const iframeStyles = {
@@ -63,16 +92,15 @@ const CheckoutForm = ({ price }: { price: number }) => {
    return (
       <section className='stripe-checkout'>
          <h1>Stripe checkout form</h1>
-         <form onSubmit={handleSubmit}>
+         <form onSubmit={(e) => handleSubmit(e)}>
             <section className='form-details'>
-               <FormDetailsFields method={handleInputChange} />
+               <FormDetailsFields />
             </section>
             <section className='card-element'>
                <CardElement options={cardElementOpts} />
             </section>
-
-            {/* <CheckoutError>{checkoutError}</CheckoutError> */}
-            <button>Payer</button>
+            <section>{checkoutError}</section>
+            <button disabled={isProcessing}>{isProcessing ? 'Processing...' : `Payer ${price} EUR`}</button>
          </form>
       </section>
    );

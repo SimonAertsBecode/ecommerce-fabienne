@@ -1,7 +1,7 @@
 import React from 'react';
 import FormField from './FormField';
 
-const FormDetailsFields = ({ method }: { method: React.ChangeEventHandler<HTMLInputElement> }) => {
+const FormDetailsFields = ({ method }: { method?: React.ChangeEventHandler<HTMLInputElement> }) => {
    return (
       <>
          <FormField name='name' label='Name' type='text' placeholder='Jane Doe' method={method} required />

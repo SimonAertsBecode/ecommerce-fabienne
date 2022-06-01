@@ -1,13 +1,16 @@
 import dotenv from 'dotenv';
+dotenv.config();
 
 //*Type imports
 import { Request, Response } from 'express';
 
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.REACT_APP_SECRET_STRIPE_KEY!, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
    apiVersion: '2020-08-27',
 });
+
+console.log(process.env.STRIPE_SECRET_KEY!);
 
 export default async (req: Request, res: Response) => {
    if (req.method === 'POST') {
