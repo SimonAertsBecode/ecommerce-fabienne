@@ -100,7 +100,7 @@ const CheckoutForm = ({ price }: { price: number }) => {
                <CardElement options={cardElementOpts} />
             </section>
             <section>{checkoutError}</section>
-            <button disabled={isProcessing}>{isProcessing ? 'Processing...' : `Payer ${price} EUR`}</button>
+            <button disabled={isProcessing || !stripe}>{isProcessing ? 'Processing...' : `Payer ${price} EUR`}</button>
          </form>
       </section>
    );
