@@ -14,63 +14,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllOrders = exports.getOrder = exports.deleteOrder = exports.updateOrder = exports.createOrder = void 0;
 const Order_1 = __importDefault(require("../models/Order"));
+const CRUD_1 = __importDefault(require("../utils/CRUD"));
 //Create
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const newOrder = new Order_1.default(req.body);
-    try {
-        const savedOrder = yield newOrder.save();
-        res.status(200).json(savedOrder);
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.create(req, res, Order_1.default);
 });
 exports.createOrder = createOrder;
 //Update Order
 const updateOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    try {
-        const getOrder = yield Order_1.default.findByIdAndUpdate(id, {
-            $set: req.body,
-        }, { new: true });
-        res.status(200).json(getOrder);
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.update(req, res, Order_1.default);
 });
 exports.updateOrder = updateOrder;
 //Delete
 const deleteOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield Order_1.default.findByIdAndDelete(req.params.id);
-        res.status(200).json('Order successfully deleted');
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.delete(req, res, Order_1.default);
 });
 exports.deleteOrder = deleteOrder;
 //Get user order
 const getOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId } = req.params;
-    try {
-        const order = yield Order_1.default.find({ userId });
-        res.status(200).json(order);
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.getOne(req, res, Order_1.default);
 });
 exports.getOrder = getOrder;
 //Get all Orders
 const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const orders = yield Order_1.default.find().sort({ id: -1 });
-        res.status(200).json(orders);
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.getAll(req, res, Order_1.default);
 });
 exports.getAllOrders = getAllOrders;

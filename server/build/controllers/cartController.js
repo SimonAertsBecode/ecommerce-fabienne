@@ -37,6 +37,6 @@ const getCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getCart = getCart;
 //Get all carts
 const getAllCarts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    CRUD_1.default.getAll(null, res, Cart_1.default);
+    CRUD_1.default.getAll(req, res, Cart_1.default);
 });
 exports.getAllCarts = getAllCarts;

@@ -22,48 +22,21 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.createProduct = createProduct;
 //Update
 const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    try {
-        const getProduct = yield Product_1.default.findByIdAndUpdate(id, {
-            $set: req.body,
-        }, { new: true });
-        res.status(200).json(getProduct);
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.update(req, res, Product_1.default);
 });
 exports.updateProduct = updateProduct;
 //Delete
 const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield Product_1.default.findByIdAndDelete(req.params.id);
-        res.status(200).json('product successfully deleted');
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.delete(req, res, Product_1.default);
 });
 exports.deleteProduct = deleteProduct;
 //Get a product
 const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const product = yield Product_1.default.findById(req.params.id);
-        res.status(200).json(product);
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.getOne(req, res, Product_1.default);
 });
 exports.getProduct = getProduct;
 //Get all products
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const products = yield Product_1.default.find().sort({ id: -1 });
-        res.status(200).json(products);
-    }
-    catch (error) {
-        res.status(500).json(error);
-    }
+    CRUD_1.default.getAll(req, res, Product_1.default);
 });
 exports.getAllProducts = getAllProducts;

@@ -18,6 +18,8 @@ const crypto_js_1 = __importDefault(require("crypto-js"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 //*Import class
 const UserUtils_1 = require("../utils/UserUtils");
+//**Import error management */
+const errorManagement_1 = require("../utils/errorManagement");
 //*REGISTER
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, email, password } = req.body;
@@ -31,7 +33,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(201).json(UserUtils_1.useUserUtils.removePassword(savedUser));
     }
     catch (error) {
-        res.status(500).json(error);
+        res.status(500).json((0, errorManagement_1.handleFormError)(error));
     }
 });
 exports.register = register;
@@ -54,6 +56,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(200).json(Object.assign(Object.assign({}, UserUtils_1.useUserUtils.removePassword(user)), { accessToken }));
     }
     catch (error) {
+        //error message already handled by mongoDB
         res.status(500).json(error);
     }
 });

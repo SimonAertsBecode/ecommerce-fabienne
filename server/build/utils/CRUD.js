@@ -16,6 +16,9 @@ const UserUtils_1 = require("./UserUtils");
 //**Models import
 const Cart_1 = __importDefault(require("../models/Cart"));
 const Order_1 = __importDefault(require("../models/Order"));
+const User_1 = __importDefault(require("../models/User"));
+//*Error management
+const errorManagement_1 = require("../utils/errorManagement");
 class CRUD extends UserUtils_1.UserUtils {
     constructor() {
         super();
@@ -28,7 +31,7 @@ class CRUD extends UserUtils_1.UserUtils {
                 res.status(200).json(savedModel);
             }
             catch (error) {
-                res.status(500).json(error);
+                res.status(500).json((0, errorManagement_1.handleFormError)(error));
             }
         });
     }
@@ -39,10 +42,10 @@ class CRUD extends UserUtils_1.UserUtils {
                 const getItem = yield model.findByIdAndUpdate(id, {
                     $set: req.body,
                 }, { new: true });
-                res.status(200).json(getItem);
+                res.status(200).json(model === User_1.default ? this.removePassword(getItem) : getItem);
             }
             catch (error) {
-                res.status(500).json(error);
+                res.status(500).json((0, errorManagement_1.handleFormError)(error));
             }
         });
     }
@@ -50,7 +53,7 @@ class CRUD extends UserUtils_1.UserUtils {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield model.findByIdAndDelete(req.params.id);
-                res.status(200).json('cart successfully deleted');
+                res.status(200).json(`${model} has been deleted successfully`);
             }
             catch (error) {
                 res.status(500).json(error);
@@ -68,18 +71,18 @@ class CRUD extends UserUtils_1.UserUtils {
             }
             try {
                 const item = yield model.findOne({ rightId });
-                res.status(200).json(item);
+                res.status(200).json(model === User_1.default ? this.removePassword(item) : item);
             }
             catch (error) {
                 res.status(500).json(error);
             }
         });
     }
-    getAll(_, res, model) {
+    getAll(req, res, model) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const allItems = yield model.find().sort({ id: -1 });
-                res.status(200).json(allItems);
+                res.status(200).json(model === User_1.default ? this.removePwdFromAllUsers(allItems) : allItems);
             }
             catch (error) {
                 res.status(500).json(error);
