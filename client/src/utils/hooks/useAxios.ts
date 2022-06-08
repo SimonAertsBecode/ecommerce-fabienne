@@ -1,21 +1,29 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
-export const useAxios = (axiosCall: string) => {
-   const [data, setData] = useState([]);
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL!;
 
-   const fetchDatas = async () => {
+export const useAxios = <T>(axiosParams: AxiosRequestConfig) => {
+   const [datas, setDatas] = useState<T>();
+   const [error, setError] = useState<string | null>(null);
+   const [loading, setLoading] = useState(true);
+
+   const fetch = async () => {
       try {
-         const request = await axios.get(`${process.env.REACT_APP_SERVER_URL}${axiosCall}`);
-         setData(request.data);
-      } catch (error) {
-         console.log(error);
+         const request = await axios.request(axiosParams);
+         const response = request.data;
+         setDatas(response);
+      } catch (err) {
+         const error = err as AxiosError;
+         setError(error.message);
+      } finally {
+         setLoading(false);
       }
    };
 
    useEffect(() => {
-      fetchDatas();
-   }, []);
+      fetch();
+   }, []); // eslint-disable-line
 
-   return { data };
+   return { datas, error, loading } as const;
 };

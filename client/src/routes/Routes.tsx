@@ -12,7 +12,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 
 const Routes = () => {
-   const user = true;
+   const user = false;
    return (
       <Router>
          <Route index element={<Home />} />

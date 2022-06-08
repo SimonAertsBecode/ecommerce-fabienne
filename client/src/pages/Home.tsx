@@ -4,11 +4,10 @@ import ProductList from './Product/ProductList';
 
 const Home = () => {
    return (
-      <>
+      <section className='home'>
          <h1>Page d'acceuil</h1>
-         <Link to={'pay'}>go to payment section</Link>
          <ProductList />
-      </>
+      </section>
    );
 };
 

@@ -1,14 +1,16 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes/Routes';
+import Navigation from './routes/Navigation';
 
 function App() {
    return (
-      <section className='container'>
-         <BrowserRouter>
+      <BrowserRouter>
+         <Navigation />
+         <section className='container'>
             <Routes />
-         </BrowserRouter>
-      </section>
+         </section>
+      </BrowserRouter>
    );
 }
 
