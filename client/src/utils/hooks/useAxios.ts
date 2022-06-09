@@ -12,6 +12,7 @@ export const useAxios = <T>(axiosParams: AxiosRequestConfig) => {
       try {
          const request = await axios.request(axiosParams);
          const response = request.data;
+         console.log(response);
          setDatas(response);
       } catch (err) {
          const error = err as AxiosError;

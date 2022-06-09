@@ -57,15 +57,15 @@ class CRUD extends UserUtils {
    }
 
    async getOne(req: Request, res: Response, model: models) {
-      if (model === Order || Cart) {
-         //Var declaration to be able to access it outside of the if()scope
-         var { userId: rightId } = req.params;
+      let id;
+      if (model === Order || model === Cart) {
+         id = req.params.userId;
       } else {
-         var { id: rightId } = req.params;
+         id = req.params.id;
       }
 
       try {
-         const item = await model.findOne({ rightId });
+         const item = await model.findOne({ _id: id });
          res.status(200).json(model === User ? this.removePassword(item) : item);
       } catch (error) {
          res.status(500).json(error);
