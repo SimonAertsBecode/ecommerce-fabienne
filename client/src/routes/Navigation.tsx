@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../redux/store';
 
 const Navigation = () => {
+   const quantity = useSelector((state: IRootState) => state.cart.quantity);
+
    return (
       <>
          <nav className='logo'>
