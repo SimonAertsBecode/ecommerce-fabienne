@@ -10,6 +10,14 @@ import Cancel from '../pages/pay/Cancel';
 import Cart from '../pages/Cart';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import News from '../pages/news/News';
+import About from '../pages/about/About';
+import Exhibition from '../pages/exhibition/Exhibition';
+import Press from '../pages/press/Press';
+import Contact from '../pages/contact/Contact';
+import Paintings from '../pages/paintings/Paintings';
+import Photos from '../pages/photos/Photos';
+import Visuals from '../pages/visuals/Visuals';
 
 const Routes = () => {
    const user = false;
@@ -30,6 +38,14 @@ const Routes = () => {
             <Route path='cancel' element={<Cancel />} />
             <Route path='*' element={<Navigate to='/' />} />
          </Route>
+         <Route path={'news'} element={<News />} />
+         <Route path={'about'} element={<About />} />
+         <Route path={'exhibition'} element={<Exhibition />} />
+         <Route path={'press'} element={<Press />} />
+         <Route path={'contact'} element={<Contact />} />
+         <Route path={'painting'} element={<Paintings />} />
+         <Route path={'photos'} element={<Photos />} />
+         <Route path={'visuals'} element={<Visuals />} />
       </Router>
    );
 };

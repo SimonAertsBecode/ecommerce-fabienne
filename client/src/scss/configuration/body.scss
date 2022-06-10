@@ -14,8 +14,19 @@ body {
    min-width: 100%;
    height: 100vh;
 
+   #root {
+      height: 100%;
+      display: grid;
+      grid-template-columns: min-content auto;
+      grid-template-rows: repeat(5, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+   }
+
    .container {
       height: calc(100vh - $nav-height);
+      grid-column: 2 /6;
+      grid-row: 2 / 6;
       display: flex;
       flex-direction: column;
       align-items: center;

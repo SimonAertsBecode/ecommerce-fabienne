@@ -1,16 +1,36 @@
-nav {
-   height: $nav-height;
-   background-color: rgba(0, 81, 128, 0.479);
-   display: flex;
-   flex-direction: row;
-   justify-content: flex-end;
-   align-items: center;
-   gap: 1.5em;
-   padding-right: 2em;
+.logo {
+   grid-column: 1;
+   grid-row: 1;
+}
 
+.main-nav {
+   grid-column: 2 /6;
+   grid-row: 1;
+
+   gap: 1rem;
+   padding-right: 2rem;
+}
+
+.second-nav {
+   grid-column: 1;
+   grid-row: 2 /6;
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+}
+
+nav {
    a {
       font-size: 1.5em;
       text-decoration: none;
       color: black;
+   }
+
+   //To select first and second nav child
+   &:nth-child(-n + 2) {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
    }
 }

@@ -2,13 +2,27 @@ import { Link } from 'react-router-dom';
 
 const Navigation = () => {
    return (
-      <nav>
-         <Link to={'/'}>Acceuil</Link>
-         <Link to={'cart'}>Panier</Link>
-         <Link to={'login'}>Se connecter</Link>
-         <Link to={'register'}>S'enregister</Link>
-         <Link to={'pay'}>go to payment section</Link>
-      </nav>
+      <>
+         <nav className='logo'>
+            <Link to={'/'}>Home</Link>
+         </nav>
+         <nav className='main-nav'>
+            <Link to={'cart'}>Cart</Link>
+            <Link to={'login'}>Login</Link>
+            <Link to={'register'}>Register</Link>
+            <Link to={'pay'}>Payment</Link>
+         </nav>
+         <nav className='second-nav'>
+            <Link to={'news'}>News</Link>
+            <Link to={'about'}>About</Link>
+            <Link to={'exhibition'}>Exhibition</Link>
+            <Link to={'press'}>Press</Link>
+            <Link to={'contact'}>Contact</Link>
+            <Link to={'painting'}>Painting</Link>
+            <Link to={'photos'}>Photos</Link>
+            <Link to={'visuals'}>Visuals</Link>
+         </nav>
+      </>
    );
 };
 
