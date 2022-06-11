@@ -5,10 +5,12 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import FormDetailsFields from '../../../components/prebuilt/FormDetailsFields';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../../redux/store';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = () => {
    const [isProcessing, setProcessingTo] = useState(false);
    const [checkoutError, setCheckoutError] = useState<string | undefined>();
+   const navigate = useNavigate();
 
    const total = useSelector((state: IRootState) => state.cart.total);
    const stripe = useStripe();
@@ -40,8 +42,8 @@ const CheckoutForm = () => {
       if (!stripe || !elements) return;
 
       try {
-         const { data: clientSecret } = await axios.post(`${process.env.REACT_APP_SERVER_URL!}api/pay/payment_intents`, {
-            amount: total,
+         const { data: clientSecret } = await axios.post(`${process.env.REACT_APP_SERVER_URL!}pay/payment_intents`, {
+            amount: total * 100,
          });
 
          const cardElement = elements.getElement(CardElement)!;
@@ -58,6 +60,9 @@ const CheckoutForm = () => {
             setProcessingTo(false);
             return;
          }
+
+         setCheckoutError(undefined);
+         navigate('/pay/success');
       } catch (error: any) {
          if (error) {
             setCheckoutError(error.message);

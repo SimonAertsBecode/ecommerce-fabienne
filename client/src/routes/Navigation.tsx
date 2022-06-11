@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { IRootState } from '../redux/store';
 import CartIcon from '../pages/Cart/CartIcon';
 
 //**Component import */
 
 const Navigation = () => {
-   const quantity = useSelector((state: IRootState) => state.cart.quantity);
-   console.log(quantity);
-
    return (
       <>
          <nav className='logo'>
@@ -16,11 +11,10 @@ const Navigation = () => {
          </nav>
          <nav className='main-nav'>
             <Link to={'cart'}>
-               <CartIcon quantity={quantity} />
+               <CartIcon />
             </Link>
             <Link to={'login'}>Login</Link>
             <Link to={'register'}>Register</Link>
-            <Link to={'pay'}>Payment</Link>
          </nav>
          <nav className='second-nav'>
             <Link to={'news'}>News</Link>
