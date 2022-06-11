@@ -7,17 +7,17 @@ import Pay from '../pages/pay/Pay';
 import Payment from '../pages/pay/Payment';
 import Success from '../pages/pay/Success';
 import Cancel from '../pages/pay/Cancel';
-import Cart from '../pages/Cart';
+import Cart from '../pages/Cart/Cart';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import News from '../pages/news/News';
-import About from '../pages/about/About';
-import Exhibition from '../pages/exhibition/Exhibition';
-import Press from '../pages/press/Press';
-import Contact from '../pages/contact/Contact';
-import Paintings from '../pages/paintings/Paintings';
-import Photos from '../pages/photos/Photos';
-import Visuals from '../pages/visuals/Visuals';
+import News from '../pages/News/News';
+import About from '../pages/About/About';
+import Exhibition from '../pages/Exhibition/Exhibition';
+import Press from '../pages/Press/Press';
+import Contact from '../pages/Contact/Contact';
+import Paintings from '../pages/Paintings/Paintings';
+import Photos from '../pages/Photos/Photos';
+import Visuals from '../pages/Visuals/Visuals';
 
 const Routes = () => {
    const user = false;

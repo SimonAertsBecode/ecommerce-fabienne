@@ -2,9 +2,16 @@ import { useAxios } from '../../utils/hooks/useAxios';
 import { IProduct } from '../../utils/interface/interfaces';
 import Loading from '../../components/main/Loading';
 import { useParams } from 'react-router-dom';
+import { addProduct } from '../../redux/cartRedux';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 const Product = () => {
    const { id } = useParams();
+   const dispatch = useDispatch();
+
+   const [disableBtn, setDisableBtn] = useState(false);
+
    const {
       datas: product,
       error,
@@ -18,6 +25,15 @@ const Product = () => {
 
    const { title, image, description } = product;
 
+   const handleClick = () => {
+      dispatch(
+         addProduct({
+            product,
+         })
+      );
+      setDisableBtn(true);
+   };
+
    return (
       <section className='product'>
          <Loading loading={loading} text={'Loading...'}>
@@ -26,6 +42,9 @@ const Product = () => {
             </section>
             <section className='description'>
                <p>{description}</p>
+               <button disabled={disableBtn} onClick={handleClick}>
+                  {disableBtn ? 'Product added...' : 'Add product'}
+               </button>
             </section>
          </Loading>
       </section>

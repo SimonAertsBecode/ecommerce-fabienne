@@ -1,13 +1,16 @@
-import React, { FormEvent, SyntheticEvent, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import axios from 'axios';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 import FormDetailsFields from '../../../components/prebuilt/FormDetailsFields';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../../redux/store';
 
-const CheckoutForm = ({ price }: { price: number }) => {
+const CheckoutForm = () => {
    const [isProcessing, setProcessingTo] = useState(false);
    const [checkoutError, setCheckoutError] = useState<string | undefined>();
 
+   const total = useSelector((state: IRootState) => state.cart.total);
    const stripe = useStripe();
    const elements = useElements();
 
@@ -38,7 +41,7 @@ const CheckoutForm = ({ price }: { price: number }) => {
 
       try {
          const { data: clientSecret } = await axios.post(`${process.env.REACT_APP_SERVER_URL!}api/pay/payment_intents`, {
-            amount: price * 100,
+            amount: total,
          });
 
          const cardElement = elements.getElement(CardElement)!;
@@ -100,7 +103,7 @@ const CheckoutForm = ({ price }: { price: number }) => {
                <CardElement options={cardElementOpts} />
             </section>
             <section>{checkoutError}</section>
-            <button disabled={isProcessing || !stripe}>{isProcessing ? 'Processing...' : `Payer ${price} EUR`}</button>
+            <button disabled={isProcessing || !stripe}>{isProcessing ? 'Processing...' : `Payer ${total} EUR`}</button>
          </form>
       </section>
    );

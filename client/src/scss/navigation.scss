@@ -6,13 +6,12 @@
 .main-nav {
    grid-column: 2 /6;
    grid-row: 1;
-
    gap: 1rem;
    padding-right: 2rem;
 }
 
 .second-nav {
-   padding-left: 1rem;
+   padding: 0 1rem;
    grid-column: 1;
    grid-row: 2 /6;
    display: flex;

@@ -16,7 +16,7 @@ const StripeContainer = () => {
    return (
       <section className='stripe-container'>
          <Elements stripe={stripePromise}>
-            <CheckoutForm price={20} />
+            <CheckoutForm />
          </Elements>
       </section>
    );
