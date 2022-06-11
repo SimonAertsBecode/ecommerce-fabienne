@@ -1,1 +1,15 @@
-$nav-height: 3rem;
+@function backgroundColor($value) {
+   $result: rgba(
+      $color: #d3d0d0,
+      $alpha: $value,
+   );
+   @return $result;
+}
+
+@function contrasteColor($value) {
+   $result: rgba(
+      $color: #00379d,
+      $alpha: $value,
+   );
+   @return $result;
+}

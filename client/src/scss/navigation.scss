@@ -8,6 +8,21 @@
    grid-row: 1;
    gap: 1rem;
    padding-right: 2rem;
+
+   .cart-icon {
+      position: relative;
+      span {
+         position: absolute;
+         top: -15px;
+         right: -15px;
+         background-color: contrasteColor(0.8);
+         color: white;
+         text-align: center;
+         height: 25px;
+         width: 25px;
+         border-radius: 100%;
+      }
+   }
 }
 
 .second-nav {
@@ -34,6 +49,6 @@ nav {
       flex-direction: row;
       justify-content: flex-end;
       align-items: center;
-      height: $nav-height;
+      height: 4rem;
    }
 }
