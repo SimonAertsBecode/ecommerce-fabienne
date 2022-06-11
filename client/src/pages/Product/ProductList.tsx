@@ -17,7 +17,6 @@ const ProductList = () => {
 
    return (
       <section className='products'>
-         <h2>Items</h2>
          <Loading loading={loading} text={'Loading products...'}>
             <ul>
                {products.map((product) => {

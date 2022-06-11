@@ -1,4 +1,5 @@
 import ProductList from './Product/ProductList';
+import Loading from '../components/main/Loading';
 
 const Home = () => {
    return (

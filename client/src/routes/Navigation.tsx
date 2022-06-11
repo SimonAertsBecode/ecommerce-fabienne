@@ -12,7 +12,7 @@ const listVariant = {
          ease: 'easeOut',
       },
    }),
-   hidden: (i: number) => ({ opacity: 0, x: '-50vh' }),
+   hidden: { opacity: 0, x: '-50vh' },
 };
 
 const Navigation = () => {
@@ -21,7 +21,7 @@ const Navigation = () => {
    const renderLinks = () => {
       return links.map((link, i) => {
          return (
-            <motion.span custom={i} initial='hidden' animate='visible' exit='hidden' variants={listVariant}>
+            <motion.span key={link} custom={i} initial='hidden' animate='visible' exit='hidden' variants={listVariant}>
                <Link to={link}>{useStringManipulation.capitalizeFirstLetter(link)}</Link>
             </motion.span>
          );
