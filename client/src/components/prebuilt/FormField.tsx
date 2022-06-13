@@ -11,10 +11,10 @@ interface formField {
 
 const FormField: React.FC<formField> = ({ label, type, name, placeholder, method }) => {
    return (
-      <section className='field'>
+      <>
          <label htmlFor={name}>{label}</label>
          <input name={name} type={type} placeholder={placeholder} onChange={method} required />
-      </section>
+      </>
    );
 };
 

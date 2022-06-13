@@ -2,7 +2,8 @@ import { FormEvent, useState } from 'react';
 import axios from 'axios';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-import FormDetailsFields from '../../../components/prebuilt/FormDetailsFields';
+import FormDetailsFields from './FormDetailsFields';
+import CheckoutError from '../../../components/prebuilt/CheckoutError';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../../redux/store';
 import { useNavigate } from 'react-router-dom';

@@ -21,7 +21,9 @@ const Product = () => {
       url: `products/find/${id}`,
    });
 
-   if (!product) return <strong>{error}</strong>;
+   if (error) return <strong>{error}</strong>;
+
+   if (!product) return null;
 
    const { title, image, description } = product;
 

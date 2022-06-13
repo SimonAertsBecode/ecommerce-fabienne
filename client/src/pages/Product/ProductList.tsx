@@ -13,13 +13,13 @@ const ProductList = () => {
       url: 'products/',
    });
 
-   if (!products) return <strong>{error}</strong>;
+   if (error) return <strong>{error}</strong>;
 
    return (
       <section className='products'>
          <Loading loading={loading} text={'Loading products...'}>
             <ul>
-               {products.map((product) => {
+               {products?.map((product) => {
                   return (
                      <li key={product._id}>
                         <Link to={`products/${product._id}`}>

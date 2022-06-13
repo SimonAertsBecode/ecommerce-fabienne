@@ -10,6 +10,7 @@ const spanVariant = {
       transition: {
          duration: 0.6,
          delay: 0,
+         ease: [0.17, 0.67, 0.6, 1.09],
       },
    },
    hidden: {
