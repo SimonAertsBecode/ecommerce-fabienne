@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL!;
@@ -20,10 +20,6 @@ export const useAxios = <T>() => {
          setLoading(false);
       }
    };
-
-   // useEffect(() => {
-   //    fetch();
-   // }, []); // eslint-disable-line
 
    return { datas, error, loading, fetch } as const;
 };
