@@ -12,11 +12,9 @@ const Product = () => {
 
    const [disableBtn, setDisableBtn] = useState(false);
 
-   const {
-      datas: product,
-      error,
-      loading,
-   } = useAxios<IProduct>({
+   const { datas: product, error, loading, fetch } = useAxios<IProduct>();
+
+   fetch({
       method: 'GET',
       url: `products/find/${id}`,
    });

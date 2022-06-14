@@ -4,11 +4,9 @@ import { IProduct } from '../../utils/interface/interfaces';
 import Loading from '../../components/main/Loading';
 
 const ProductList = () => {
-   const {
-      datas: products,
-      error,
-      loading,
-   } = useAxios<IProduct[]>({
+   const { datas: products, error, loading, fetch } = useAxios<IProduct[]>();
+
+   fetch({
       method: 'GET',
       url: 'products/',
    });
