@@ -5,6 +5,7 @@ import { IUser } from '../utils/interface/interfaces';
 import { useAxios } from '../utils/hooks/useAxios';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Login = () => {
    const { fields, handleChange } = useSetState({
@@ -17,6 +18,15 @@ const Login = () => {
 
    const { datas: user, error, loading, fetch } = useAxios<IUser>();
 
+   useEffect(() => {
+      if (user) {
+         dispatch(login({ user }));
+         localStorage.setItem('user', JSON.stringify(user));
+         localStorage.setItem('loggedIn', 'true');
+         localStorage.removeItem('loggedOut');
+      }
+   }, [user]);
+
    if (error) return <strong>{error}</strong>;
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,9 +38,7 @@ const Login = () => {
          data: fields,
       });
 
-      dispatch(login({ user }));
-
-      // navigate('/news');
+      // navigate('/userProfile', { replace: true });
    };
 
    return (

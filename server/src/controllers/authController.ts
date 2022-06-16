@@ -49,8 +49,11 @@ export const login = async (req: Request, res: Response) => {
          { expiresIn: 3600 * 24 * 3 }
       );
 
-      console.log(accessToken);
+      // console.log(accessToken);
 
+      res.status(200);
+
+      //create error: Error: Cannot set headers after they are sent to the client
       res.status(200)
          .cookie('accessToken', accessToken, {
             sameSite: 'strict',
@@ -58,9 +61,7 @@ export const login = async (req: Request, res: Response) => {
             secure: true,
             httpOnly: true,
          })
-         .send('cookie being initialised');
-      //create error: Error: Cannot set headers after they are sent to the client
-      res.status(200).json({ ...useUserUtils.removePassword(user) });
+         .json({ ...useUserUtils.removePassword(user) });
    } catch (error) {
       //error message already handled by mongoDB
       res.status(500).json(error);

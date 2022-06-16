@@ -1,5 +1,8 @@
 import { Route, Navigate, Routes as Router } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
+import { IRootState } from '../redux/store';
+
 import Home from '../pages/Home';
 import ProductList from '../pages/Product/ProductList';
 import Product from '../pages/Product/Product';
@@ -8,6 +11,7 @@ import Payment from '../pages/pay/Payment';
 import Success from '../pages/pay/Success';
 import Cancel from '../pages/pay/Cancel';
 import Cart from '../pages/Cart/Cart';
+import UserProfile from '../pages/userProfile/UserProfile';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import News from '../pages/News/News';
@@ -20,7 +24,7 @@ import Photos from '../pages/Photos/Photos';
 import Visuals from '../pages/Visuals/Visuals';
 
 const Routes = () => {
-   const user = false;
+   const user = useSelector((state: IRootState) => state.auth.loggedIn);
    return (
       <Router>
          <Route index element={<Home />} />
@@ -29,8 +33,15 @@ const Routes = () => {
             <Route path=':id' element={<Product />} />
          </Route>
          <Route path={'cart'} element={<Cart />} />
-         <Route path={'login'} element={user ? <Navigate to='/' /> : <Login />} />
-         <Route path={'register'} element={user ? <Navigate to='/' /> : <Register />} />
+         {user ? (
+            <Route path='userProfile' element={<UserProfile />} />
+         ) : (
+            <>
+               <Route path='login' element={<Login />} />
+               <Route path='register' element={<Register />} />
+            </>
+         )}
+
          <Route path='pay'>
             <Route index element={<Pay />} />
             <Route path='payment' element={<Payment />} />

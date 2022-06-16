@@ -3,12 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 //*Interfaces
 import { IUser } from '../utils/interface/interfaces';
 
+const user = localStorage.getItem('user');
+const loggedIn = localStorage.getItem('loggedIn');
+const loggedOut = localStorage.getItem('loggedOut');
+
 const authSlice = createSlice({
    name: 'auth',
    initialState: {
-      user: null as IUser | null,
-      loggedIn: false,
-      loggedOut: true,
+      user: user ? JSON.parse(user) : null,
+      loggedIn: loggedIn ? JSON.parse(loggedIn) : false,
+      loggedOut: loggedOut ? JSON.parse(loggedOut) : false,
    },
    reducers: {
       login: (state, action) => {
