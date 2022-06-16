@@ -1,4 +1,4 @@
-import FormField from '../components/prebuilt/FormField';
+import FormField from '../utils/prebuilt/FormField';
 import { useSetState } from '../utils/hooks/useState';
 import { login, logout } from '../redux/authRedux';
 import { IUser } from '../utils/interface/interfaces';
@@ -27,13 +27,6 @@ const Login = () => {
          headers: { accept: '*/*' },
          data: fields,
       });
-
-      // if (error) {
-      //    dispatch(logout());
-      //    return;
-      // }
-
-      console.log('error');
 
       dispatch(login({ user }));
 

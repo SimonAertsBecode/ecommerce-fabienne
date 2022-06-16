@@ -3,7 +3,7 @@ import axios from 'axios';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 import FormDetailsFields from './FormDetailsFields';
-import CheckoutError from '../../../components/prebuilt/CheckoutError';
+import CheckoutError from '../../../utils/prebuilt/CheckoutError';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../../redux/store';
 import { useNavigate } from 'react-router-dom';

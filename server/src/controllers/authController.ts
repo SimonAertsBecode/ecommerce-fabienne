@@ -51,7 +51,16 @@ export const login = async (req: Request, res: Response) => {
 
       console.log(accessToken);
 
-      return res.status(200).json({ ...useUserUtils.removePassword(user), accessToken });
+      res.status(200)
+         .cookie('accessToken', accessToken, {
+            sameSite: 'strict',
+            path: '/',
+            secure: true,
+            httpOnly: true,
+         })
+         .send('cookie being initialised');
+      //create error: Error: Cannot set headers after they are sent to the client
+      res.status(200).json({ ...useUserUtils.removePassword(user) });
    } catch (error) {
       //error message already handled by mongoDB
       res.status(500).json(error);

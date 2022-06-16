@@ -10,8 +10,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
    apiVersion: '2020-08-27',
 });
 
-console.log(process.env.STRIPE_SECRET_KEY!);
-
 export default async (req: Request, res: Response) => {
    if (req.method === 'POST') {
       try {

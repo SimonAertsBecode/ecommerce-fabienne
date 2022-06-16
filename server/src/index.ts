@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 //*Routes import
 import authRouter from './routes/auth';
@@ -11,8 +12,17 @@ import cartRouter from './routes/cart';
 import orderRouter from './routes/order';
 import stripeRouter from './stripe/route';
 
-const app = express();
 dotenv.config();
+
+const app = express();
+
+app.use(cookieParser());
+app.use(
+   cors({
+      credentials: true,
+      origin: 'http://localhost:3000',
+   })
+);
 
 mongoose
    .connect(process.env.MONGO_URL!)
@@ -22,12 +32,6 @@ mongoose
    .catch((err) => {
       console.log(err);
    });
-
-app.use(
-   cors({
-      origin: 'http://localhost:3000',
-   })
-);
 
 app.use(express.json());
 app.use('/api/auth', authRouter);

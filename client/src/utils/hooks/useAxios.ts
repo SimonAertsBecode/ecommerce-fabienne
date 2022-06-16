@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL!;
+axios.defaults.withCredentials = true;
 
 export const useAxios = <T>() => {
    const [datas, setDatas] = useState<T>();

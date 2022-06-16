@@ -1,5 +1,5 @@
 import React from 'react';
-import FormField from '../../../components/prebuilt/FormField';
+import FormField from '../../../utils/prebuilt/FormField';
 
 const FormDetailsFields = ({ method }: { method?: React.ChangeEventHandler<HTMLInputElement> }) => {
    return (
