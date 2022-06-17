@@ -1,10 +1,9 @@
 import FormField from '../utils/prebuilt/FormField';
 import { useSetState } from '../utils/hooks/useState';
-import { login, logout } from '../redux/authRedux';
+import { login } from '../redux/authRedux';
 import { IUser } from '../utils/interface/interfaces';
 import { useAxios } from '../utils/hooks/useAxios';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const Login = () => {
@@ -14,18 +13,12 @@ const Login = () => {
    });
 
    const dispatch = useDispatch();
-   const navigate = useNavigate();
 
    const { datas: user, error, loading, fetch } = useAxios<IUser>();
 
    useEffect(() => {
-      if (user) {
-         dispatch(login({ user }));
-         localStorage.setItem('user', JSON.stringify(user));
-         localStorage.setItem('loggedIn', 'true');
-         localStorage.removeItem('loggedOut');
-      }
-   }, [user]);
+      user && dispatch(login({ user }));
+   }, [user, dispatch]);
 
    if (error) return <strong>{error}</strong>;
 
@@ -37,8 +30,6 @@ const Login = () => {
          headers: { accept: '*/*' },
          data: fields,
       });
-
-      // navigate('/userProfile', { replace: true });
    };
 
    return (

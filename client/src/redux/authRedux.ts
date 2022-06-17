@@ -5,24 +5,26 @@ import { IUser } from '../utils/interface/interfaces';
 
 const user = localStorage.getItem('user');
 const loggedIn = localStorage.getItem('loggedIn');
-const loggedOut = localStorage.getItem('loggedOut');
 
 const authSlice = createSlice({
    name: 'auth',
    initialState: {
-      user: user ? JSON.parse(user) : null,
+      user: (user ? JSON.parse(user) : null) as null | IUser,
       loggedIn: loggedIn ? JSON.parse(loggedIn) : false,
-      loggedOut: loggedOut ? JSON.parse(loggedOut) : false,
    },
    reducers: {
       login: (state, action) => {
-         state.user = action.payload.user;
-         state.user ? (state.loggedIn = true) : (state.loggedIn = false);
+         const { user } = action.payload;
+         localStorage.setItem('user', JSON.stringify(user));
+         localStorage.setItem('loggedIn', 'true');
+         state.user = user;
+         state.loggedIn = true;
       },
       logout: (state) => {
+         localStorage.removeItem('user');
+         localStorage.removeItem('loggedIn');
          state.user = null;
          state.loggedIn = false;
-         state.loggedOut = true;
       },
    },
 });

@@ -49,11 +49,6 @@ export const login = async (req: Request, res: Response) => {
          { expiresIn: 3600 * 24 * 3 }
       );
 
-      // console.log(accessToken);
-
-      res.status(200);
-
-      //create error: Error: Cannot set headers after they are sent to the client
       res.status(200)
          .cookie('accessToken', accessToken, {
             sameSite: 'strict',
